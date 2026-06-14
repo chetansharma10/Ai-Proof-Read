@@ -1,5 +1,5 @@
 {
-  "name": "ai-writing-tool",
+  "name": "ai-proof-read",
   "version": "1.0.0",
   "description": "Ai proof reading application for desktop",
   "main": "dist/main.js",
@@ -30,8 +30,8 @@
     "robotjs": "^0.7.1"
   },
   "build": {
-    "appId": "com.aiwritingtool.app",
-    "productName": "AI Writing Tool",
+    "appId": "com.aiproofread.app",
+    "productName": "AI Proof Read Tool",
     "files":[
       "dist/**/*"
     ],
