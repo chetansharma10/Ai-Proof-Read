@@ -1,0 +1,214 @@
+<!doctype html>
+<html
+  lang="en"
+  data-bs-theme="light"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
+    />
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <style>
+      [data-bs-theme="light"] {
+        --bs-body-bg: white;
+        --bs-card-bg: #1e1e2449;
+        --bs-card-border-color: #2d2d3416;
+        --bs-primary: #070707;
+        --btn-primary-bg: #070707;
+      }
+
+      [data-bs-theme="dark"] {
+        --bs-body-bg: #000000;
+        --bs-card-bg: #1e1e24;
+        --bs-btn-close-bg: none;
+        --bs-card-border-color: #2d2d34;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: transparent !important;
+        background-color: transparent !important;
+        -webkit-user-select: none;
+        overflow: hidden;
+      }
+
+      .draggable {
+        -webkit-app-region: drag;
+      }
+
+      .card {
+        height: 100%;
+        width: 100%;
+      }
+
+      .btn-mini {
+        --bs-btn-padding-y: 0.25rem;
+        --bs-btn-padding-x: 0.5rem;
+        --bs-btn-font-size: 0.55rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card shadow-sm">
+      <div
+        class="card-header px-2 bg-transparent border-0 d-flex justify-content-between align-items-start mb-0 pb-2"
+      >
+        <div class="d-flex flex-column">
+          <p
+            class="fw-semibold text-body mb-0 pb-0 draggable"
+            style="font-size: 12px"
+          >
+            Ai Writing Tool
+          </p>
+          <small
+            class="text-body-secondary"
+            style="font-size: 10px"
+            >You have selected
+            <span id="words-count"><strong>0</strong></span> words</small
+          >
+        </div>
+
+        <div class="d-flex gap-1 align-items-center">
+          <button
+            type="button"
+            class="btn p-0"
+            id="theme-toggle-btn"
+            title="Toggle Light/Dark"
+            style="font-size: 0.5rem;border-radius:100%;"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="13"
+              height="13"
+              fill="currentColor"
+              class="bi bi-rainbow"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 4.5a7 7 0 0 0-7 7 .5.5 0 0 1-1 0 8 8 0 1 1 16 0 .5.5 0 0 1-1 0 7 7 0 0 0-7-7m0 2a5 5 0 0 0-5 5 .5.5 0 0 1-1 0 6 6 0 1 1 12 0 .5.5 0 0 1-1 0 5 5 0 0 0-5-5m0 2a3 3 0 0 0-3 3 .5.5 0 0 1-1 0 4 4 0 1 1 8 0 .5.5 0 0 1-1 0 3 3 0 0 0-3-3m0 2a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 4 0 .5.5 0 0 1-1 0 1 1 0 0 0-1-1"
+              />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            class="btn p-0"
+            id="minimize-btn"
+            aria-label="Minimize"
+            style="font-size: 0.5rem;border-radius:100%;"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-dash"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn p-0"
+            aria-label="Close"
+            id="close-btn"
+            style="font-size: 0.5rem;border-radius:100%;"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-x"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn p-0 draggable"
+            aria-label="Move"
+            id="move-btn"
+            style="font-size: 0.5rem; background-image: none;border-radius:100%;"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="10"
+              height="10"
+              fill="currentColor"
+              class="bi bi-arrows-move text-body-secondary"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.646.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 1.707V5.5a.5.5 0 0 1-1 0V1.707L6.354 2.854a.5.5 0 1 1-.708-.708zM8 10a.5.5 0 0 1 .5.5v3.793l1.146-1.147a.5.5 0 0 1 .708.708l-2 2a.5.5 0 0 1-.708 0l-2-2a.5.5 0 0 1 .708-.708L7.5 14.293V10.5A.5.5 0 0 1 8 10M.146 8.354a.5.5 0 0 1 0-.708l2-2a.5.5 0 1 1 .708.708L1.707 7.5H5.5a.5.5 0 0 1 0 1H1.707l1.147 1.146a.5.5 0 0 1-.708.708zM10 8a.5.5 0 0 1 .5-.5h3.793l-1.147-1.146a.5.5 0 0 1 .708-.708l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L14.293 8.5H10.5A.5.5 0 0 1 10 8"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body px-2 pt-0 pb-0">
+        <div
+          class="bg-body-secondary p-2 rounded"
+          style="max-height: 88px; overflow-y: auto; min-height: 88px"
+        >
+          <p
+            class="card-text placeholder-glow"
+            id="selected-text"
+            style="font-size: 10px; line-height: 1.2"
+          >
+            <span class="placeholder col-7 rounded placeholder-md"></span>
+            <span class="placeholder col-4 rounded placeholder-md"></span>
+            <span class="placeholder col-4 rounded placeholder-md"></span>
+            <span class="placeholder col-6 rounded placeholder-md"></span>
+            <span class="placeholder col-8 rounded placeholder-md"></span>
+          </p>
+        </div>
+      </div>
+
+      <div
+        class="card-footer text-body-secondary bg-transparent border-0 px-2 pt-0 d-flex justify-content-end align-items-center mb-0 pb-2"
+      >
+        <div class="d-flex gap-1">
+          <button
+            type="button"
+            class="btn btn-dark btn-mini"
+            id="regenerate-btn"
+          >
+            Regenerate
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script
+      type="module"
+      src="./dist/popover-renderer.js"
+    ></script>
+
+    <script>
+      const toggleBtn = document.getElementById("theme-toggle-btn");
+      const htmlEl = document.documentElement;
+      toggleBtn.addEventListener("click", () => {
+        const currentTheme = htmlEl.getAttribute("data-bs-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        htmlEl.setAttribute("data-bs-theme", newTheme);
+      });
+    </script>
+  </body>
+</html>

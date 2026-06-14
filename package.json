@@ -1,0 +1,42 @@
+{
+  "name": "ai-writing-tool",
+  "version": "1.0.0",
+  "description": "Ai proof reading application for desktop",
+  "main": "dist/main.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "nodemon --watch dist/ --ext js,html --exec \"electron .\"",
+    "watch-ts": "tsc --watch",
+    "test": "jest",
+    "electron-build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "electron": "42.3.0",
+    "electron-builder": "^26.15.3",
+    "jest": "^30.4.2",
+    "nodemon": "^3.1.14",
+    "ts-jest": "^29.4.11",
+    "typescript": "^6.0.3"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "dotenv": "^17.4.2",
+    "groq-sdk": "^1.2.1",
+    "robotjs": "^0.7.1"
+  },
+  "build": {
+    "appId": "com.aiwritingtool.app",
+    "productName": "AI Writing Tool",
+    "files":[
+      "dist/**/*"
+    ],
+    "directories": {
+      "output": "dist-electron"
+    }
+  }
+}
