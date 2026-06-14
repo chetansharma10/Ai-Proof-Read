@@ -1,5 +1,4 @@
-
-import { GroqService } from './groq.service';
+import { GroqService } from "./groq.service";
 
 // The test suite wrapper
 describe('GroqService', () => {
